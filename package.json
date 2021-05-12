@@ -1,0 +1,19 @@
+{
+  "name": "twitternewsbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "node-fetch": "^2.6.1",
+    "path": "^0.12.7",
+    "request": "^2.88.2",
+    "twit": "^2.2.11"
+  }
+}
