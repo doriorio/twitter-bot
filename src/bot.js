@@ -5,8 +5,6 @@ const _ = require('lodash');
 
 const T = new Twit(config.twitterKeys);
 
-console.log(T)
-
 var loopNews = (res) => {
     var cliffNotes = {};
     var counter = 1;
@@ -36,11 +34,18 @@ getNews();
 
 var tweeter = (articles) => {
     var composeTweet = function(tweet){
-        // console.log(tweet)
+        var checkLen = function(str, add){
+            if (str.length < 280 && (add.length + str.length  < 280 )) {
+                return str + add;
+            } else {
+                return str.substring(0, 280);
+            }
+        }; 
         var _ = '';
         _+=tweet.title + ' | ';
-        _+=tweet.description + ' ';
-        _+='read more @ ' + tweet.url;
+        _ = checkLen(_,(tweet.description + ' '));
+
+        _= checkLen(_,('read more @ ' + tweet.url));
         // console.log(_)
         return _;
     }
@@ -48,11 +53,14 @@ var tweeter = (articles) => {
     var current = '';
     Object.keys(articles).forEach(function(item) {
         var current = composeTweet(articles[item])
+        
         T.post('statuses/update', {'status': current}, function(err, data, response){
             console.log(err)
             console.log(data)
             console.log(response)
         })
+        
+       console.log(current);
     }); 
 }
 
